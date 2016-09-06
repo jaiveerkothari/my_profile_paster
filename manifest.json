@@ -1,0 +1,20 @@
+{
+  "name": "My Profile Paster",
+  "description": "Pastes links to relevant profiles like LinkedIn, Github etc on job and hackathon applications.",
+  "version": "0.0.1",
+  "permissions": [
+  	"contextMenus",
+  	"activeTab"
+  ],
+  "content_scripts": [
+  	{
+      "matches": ["http://*/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": ["background.js"]
+  },
+  "manifest_version": 2
+}
