@@ -10,6 +10,6 @@ console.log("**** content script running");
 
 //TODO: Be able to select from menu which profile to paste
 var field = document.activeElement;
-field.value = github;
+field.value = github_username;
 
 
