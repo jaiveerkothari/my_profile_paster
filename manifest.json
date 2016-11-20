@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "permissions": [
   	"contextMenus",
-  	"activeTab"
+  	"activeTab",
+    "storage"
   ],
   "content_scripts": [
   	{
@@ -16,5 +17,6 @@
     "persistent": false,
     "scripts": ["background.js"]
   },
+  "options_page": "options.html",
   "manifest_version": 2
 }

@@ -5,29 +5,7 @@ function genericOnClick(info, tab) {
   console.log("tab: " + JSON.stringify(tab));
 }
 
-chrome.runtime.onInstalled.addListener(function() {
-	var context = "all";
-  	var title = "Paste LinkedIn Profile";
-  	var parent = chrome.contextMenus.create({
-  		"title": title, 
-  		"contexts":[context],
-    	"id": "context" + context
-	});
-
-	var child1 = chrome.contextMenus.create({
-		"title": "Child 1", 
-		"contexts": [context],
-		"parentId": parent, 
-		"onclick": genericOnClick});
-
-});
-
-// add click event
-chrome.contextMenus.onClicked.addListener(onClickHandler);
-
-// The onClicked callback function.
 function onClickHandler(info, tab) {
-  
 
   console.log("*** Inside onClickHandler");
   console.log(info);
@@ -37,5 +15,59 @@ function onClickHandler(info, tab) {
 
   chrome.tabs.executeScript(null, {file: "content.js"});
 
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+    console.log("TABS ARE:");
+    console.log(tabs);
+    chrome.tabs.sendMessage(tabs[0].id, {action: info.menuItemId}, function(response) {});  
+  });
+
+  
+
+
+
+
 
 };
+
+chrome.contextMenus.onClicked.addListener(onClickHandler);
+
+chrome.runtime.onInstalled.addListener(function() {
+	var context = "all";
+  var title = "Paste Profile";
+  var linkedin = chrome.contextMenus.create({
+  	"title": "LinkedIn", 
+  	"contexts":[context],
+    "id": "1"
+	});
+
+	var github = chrome.contextMenus.create({
+		"title": "Github Username", 
+		"contexts": [context],
+		"id": "2"
+  });
+
+  var personal = chrome.contextMenus.create({
+    "title": "Personal", 
+    "contexts": [context],
+    "id": "3"
+  });
+
+  var devpost = chrome.contextMenus.create({
+    "title": "Github Profile", 
+    "contexts": [context],
+    "id": "4"
+  });
+
+});
+
+
+
+// add click event
+
+
+// chrome.contextMenus.onClicked.addListener(function(info,tab){
+//   console.log("yo homies");
+
+// });
+
+// The onClicked callback function.
